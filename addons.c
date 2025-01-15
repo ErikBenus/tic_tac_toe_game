@@ -27,7 +27,7 @@ void printTitle() {
     printf("|\n");
 
     // Dolný rám
-    for (int i = 0; i < consoleWidth; i++) printf("*");
+    for (int i = 0; i < consoleWidth; i++) printf("=");
     printf("\n\n");
 }
 
