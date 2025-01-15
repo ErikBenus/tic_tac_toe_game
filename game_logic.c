@@ -4,18 +4,18 @@
 #include <string.h>
 
 // Vytvorenie hernej logiky
-GameLogic* create_game_logic(int size, int win_condition, int num_players, char *symbols, char names[10][50]) {
+GameLogic* create_game_logic(int size, int win_condition, int num_players) {
     GameLogic *game = malloc(sizeof(GameLogic));
     game->size = size;
     game->win_condition = win_condition;
     game->num_players = num_players;
     game->current_player = 0;
 
-    // Kopírovanie symbolov a mien hráčov
-    for (int i = 0; i < num_players; i++) {
-        game->player_symbols[i] = symbols[i];
-        strcpy(game->player_names[i], names[i]); // Skopírovanie mena
-    }
+    // // Kopírovanie symbolov a mien hráčov
+    // for (int i = 0; i < num_players; i++) {
+    //     game->player_symbols[i] = symbols[i];
+    //     strcpy(game->player_names[i], names[i]); // Skopírovanie mena
+    // }
 
     // Inicializácia hracej plochy
     game->board = malloc((size + 1) * sizeof(char *)); // +1 kvôli číslovaniu
@@ -69,14 +69,15 @@ void print_board(int size_, char **board_) {
 
 
 // Vykonanie ťahu
-int make_move(Move move) {
-    // Posun o 1 kvôli číslovaniu
-    if (row < 1 || move.row > game->size || col < 1 || move.col > game->size || game->board[move.row][move.col] != '-') {
-        return 0; // Neplatný ťah
-    }
-    //game->board[row][col] = game->player_symbols[game->current_player];
-    return 1; // Platný ťah
-}
+// int make_move(Move move) {
+//     // Posun o 1 kvôli číslovaniu
+//     GameLogic* game;
+//     if (move.row < 1 || move.row > game->size || move.col < 1 || move.col > game->size || game->board[move.row][move.col] != '-') {
+//         return 0; // Neplatný ťah
+//     }
+//     //game->board[row][col] = game->player_symbols[game->current_player];
+//     return 1; // Platný ťah
+// }
 
 // Kontrola víťaza
 int check_winner(GameLogic *game) {

@@ -15,6 +15,13 @@ set(CMAKE_C_STANDARD 99)
 # Zoznam všetkých zdrojových súborov
 set(SOURCES
     main.c
+    server.c
+    client.c
+    game_logic.c
+    shared_data.c
+    shared_names.c
+    shm.c
+    socket_manager.c
     addons.c
 )
 
