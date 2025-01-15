@@ -1,12 +1,14 @@
 
-#include "shared_names.c"
+#include "shared_names.h"
 #include <string.h>
 #include <stdlib.h>
 
 
 void clearNames(SharedNames* names){
     free(names->shm_);
-    free(names->semMutex_);
+    free(names->mut_pc_);
+    free(names->sem_produce_);
+    free(names->sem_consume_);
 }
 
 //Funkcia prebratá z cvičení
@@ -21,7 +23,9 @@ char * add_suffix(const char* name, const char* suffix){
   // možno ptorbený FREE k result
 }
 
-void createNames(const char* suffix, SharedNames names){
+void createNames(const char* suffix, SharedNames* names){
     names->shm_ = add_suffix("SHM", suffix);
-    names->semMutex_ = add_suffix("SEM-MUTEX", suffix);
+    names->mut_pc_= add_suffix("MUT_PC", suffix);
+    names->sem_produce_= add_suffix("SEM_PRODUCE", suffix);
+    names->sem_consume_= add_suffix("SEM_CONSUME", suffix);
 }
