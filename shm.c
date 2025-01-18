@@ -7,6 +7,7 @@
 
 #include "shm.h"
 #include "game_logic.h"
+#include "shared_data.h"
 
 
 void shm_destroy(SharedNames* names) {
@@ -17,7 +18,8 @@ void shm_destroy(SharedNames* names) {
     }
 }
 
-void shm_init(SharedNames* names) {
+void shm_init(SharedNames* names, GameLogic* shared_data) {
+    shared_data_init(names);
     const int shm_fd = shm_open(names->shm_, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
     if (shm_fd == -1) {
         perror("Nemôžem vytvoriť zdieľanú pamäť");
@@ -36,25 +38,17 @@ void shm_init(SharedNames* names) {
     }
 
     // Inicializácia údajov
-    // shm_ptr->size = shared_data->size;
-    // shm_ptr->win_condition = shared_data->win_condition;
-    // shm_ptr->num_players = shared_data->num_players;
-    // shm_ptr->current_player = 0;
-    // shm_ptr->winner = -1;
+    shm_ptr->size = shared_data->size;
+    shm_ptr->win_condition = shared_data->win_condition;
+    shm_ptr->num_players = shared_data->num_players;
+    shm_ptr->current_player = 0;
+    shm_ptr->winner = -1;
 
-    // shm_ptr->board = malloc(shm_ptr->size * sizeof(char*));
-    // for (int i = 0; i < shm_ptr->size; i++) {
-    //     shm_ptr->board[i] = calloc(shm_ptr->size, sizeof(char));
-    // }
-
-    // // Vytvorenie semaforov
-    // sem_t* sem_write = sem_open(names->semMutex_, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 1);
-    // if (sem_write == SEM_FAILED) {
-    //     perror("Nemôžem vytvoriť semafor");
-    //     shm_unlink(names->shm_);
-    //     exit(EXIT_FAILURE);
-    // }
-
+    for (int i = 0; i <= shm_ptr->size; i++) {
+        for (int j = 0; j <= shm_ptr->size; j++) {
+            shm_ptr->board[i][j] = shared_data->board[i][j]; 
+        }
+    }
     munmap(shm_ptr, sizeof(GameLogic));
     server_shm_close(shm_fd, shm_ptr);
 }
