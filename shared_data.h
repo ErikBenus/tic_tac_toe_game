@@ -15,8 +15,9 @@ typedef struct SharedData {
     GameLogic* game;
     int fd_;
     sem_t *mut_pc_;
-    sem_t *sem_produce_;
-    sem_t *sem_consume_;
+    sem_t *startGame;
+    sem_t *update_board;
+    sem_t *move_sem;
 } SharedData;
 
 
@@ -25,11 +26,11 @@ void shared_data_destroy(SharedNames* shared_names);
 void shared_data_open(SharedData *this, SharedNames* shared_names);
 void shared_data_close(SharedData *this);
 
-void sh_add_client(SharedData* sharedData);
-void sh_make_move(SharedData* sharedData);
-void sh_receive_board(SharedData* sharedData);
-int symbol_exists(char symbol);
-int player_exists(char* name);
+// void sh_add_client(SharedData* sharedData);
+// void sh_make_move(SharedData* sharedData);
+// void sh_receive_board(SharedData* sharedData);
+// int symbol_exists(char symbol);
+// int player_exists(char* name);
 
 
 

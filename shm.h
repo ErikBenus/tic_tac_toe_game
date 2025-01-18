@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 
-void shm_init(SharedNames* names);
+void shm_init(SharedNames* names, GameLogic* shared_data) ;
 void shm_destroy(SharedNames* names);
 void server_shm_open(SharedNames* names, GameLogic **outSharedData, int *out_fd_shm);
 void server_shm_close(int fd, GameLogic* sharedData);

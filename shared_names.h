@@ -3,11 +3,12 @@
 
 typedef struct SharedNames
 {
-    char* shm_;
+    char *shm_;
     char *mut_pc_;
-    char *sem_produce_;
-    char *sem_consume_;
-    
+    char serverName[30];
+    char *startGame;
+    char *update_board;
+    char *move_sem;
 } SharedNames;
 
 void clearNames(SharedNames* names);

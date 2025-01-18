@@ -7,8 +7,9 @@
 void clearNames(SharedNames* names){
     free(names->shm_);
     free(names->mut_pc_);
-    free(names->sem_produce_);
-    free(names->sem_consume_);
+    free(names->startGame);
+    free(names->update_board);
+    free(names->move_sem);
 }
 
 //Funkcia prebratá z cvičení
@@ -26,6 +27,7 @@ char * add_suffix(const char* name, const char* suffix){
 void createNames(const char* suffix, SharedNames* names){
     names->shm_ = add_suffix("SHM", suffix);
     names->mut_pc_= add_suffix("MUT_PC", suffix);
-    names->sem_produce_= add_suffix("SEM_PRODUCE", suffix);
-    names->sem_consume_= add_suffix("SEM_CONSUME", suffix);
+    names->startGame = add_suffix("START_GAME", suffix);
+    names->update_board = add_suffix("UPDATE_BOARD", suffix);
+    names->move_sem = add_suffix("MOVE_SEM", suffix);
 }
