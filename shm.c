@@ -11,7 +11,6 @@
 
 
 void shm_destroy(SharedNames* names) {
-    // Odstrániť zdieľanú pamäť
     if (shm_unlink(names->shm_) == -1) {
         perror("Nemôžem odstrániť zdieľanú pamäť");
         exit(EXIT_FAILURE);
@@ -19,7 +18,8 @@ void shm_destroy(SharedNames* names) {
 }
 
 void shm_init(SharedNames* names, GameLogic* shared_data) {
-    shared_data_init(names);
+    shared_data_init(names, shared_data->num_players);
+    shm_unlink(names->shm_);
     const int shm_fd = shm_open(names->shm_, O_RDWR | O_CREAT | O_EXCL, S_IRUSR | S_IWUSR);
     if (shm_fd == -1) {
         perror("Nemôžem vytvoriť zdieľanú pamäť");

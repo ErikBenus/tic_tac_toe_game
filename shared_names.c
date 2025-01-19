@@ -2,7 +2,7 @@
 #include "shared_names.h"
 #include <string.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 
 void clearNames(SharedNames* names){
     free(names->shm_);
@@ -10,6 +10,10 @@ void clearNames(SharedNames* names){
     free(names->startGame);
     free(names->update_board);
     free(names->move_sem);
+
+    for(int i = 0; i < MAX_PLAYERS; i++) {        
+      free(names->player_sems[i]);
+    }
 }
 
 //Funkcia prebratá z cvičení
@@ -21,7 +25,6 @@ char * add_suffix(const char* name, const char* suffix){
   result[name_len] = '-';
   strcpy(result + name_len + 1, suffix);
   return result;
-  // možno ptorbený FREE k result
 }
 
 void createNames(const char* suffix, SharedNames* names){
@@ -30,4 +33,10 @@ void createNames(const char* suffix, SharedNames* names){
     names->startGame = add_suffix("START_GAME", suffix);
     names->update_board = add_suffix("UPDATE_BOARD", suffix);
     names->move_sem = add_suffix("MOVE_SEM", suffix);
+
+    for(int i = 0; i < MAX_PLAYERS; i++) {
+      char player_name[MAX_NAME_LENGTH]; 
+      snprintf(player_name, sizeof(player_name), "PLAYER%d", i + 1);
+      names->player_sems[i] = add_suffix(player_name, suffix);
+    }
 }
