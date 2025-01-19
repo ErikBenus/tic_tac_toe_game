@@ -42,26 +42,4 @@ void printStartMenu() {
     printf("Vyberte možnosť: \n");
 
 };
- 
-/*void process_special_command(const char* input, Server* server) {
-    if (strncmp(input, "-h", 2) == 0) {
-        // Príkaz pre help
-        printf("HELP: Zadajte riadok a stĺpec pre ťah, alebo použite príkazy:\n");
-        printf("-h: zobraziť tento pomocník\n");
-        printf("-e: odísť zo hry\n");
-        printf("-s: uložiť hru (implementácia neskôr)\n");
-    } else if (strncmp(input, "-e", 2) == 0) {
-        // Príkaz pre leave
-        printf("Ukončenie hry\n");
-        exit(0); 
-    } else if (strncmp(input, "-s", 2) == 0) {
-        // Príkaz pre save
-        printf("Zadajte názov súboru pre uloženie hry: ");
-        char filename[100];
-        scanf("%s", filename);
-        save_game_to_file(server->game, filename);
-    } else {
-        // Ak sa nezadaný príkaz nenachádza, ignorujeme
-        printf("Neznámy príkaz: %s\n", input);
-    }
-}*/
+

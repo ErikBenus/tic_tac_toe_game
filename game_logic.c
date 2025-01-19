@@ -3,37 +3,6 @@
 #include "game_logic.h"
 #include <string.h>
 
-// Vytvorenie hernej logiky
-/*GameLogic* create_game_logic(int size, int win_condition, int num_players) {
-    GameLogic *game = malloc(sizeof(GameLogic));
-    game->size = size;
-    game->win_condition = win_condition;
-    game->num_players = num_players;
-    game->current_player = 0;
-
-    // // Kopírovanie symbolov a mien hráčov
-    // for (int i = 0; i < num_players; i++) {
-    //     game->player_symbols[i] = symbols[i];
-    //     strcpy(game->player_names[i], names[i]); // Skopírovanie mena
-    // }
-
-    // Inicializácia hracej plochy
-    game->board = malloc((size + 1) * sizeof(char *)); // +1 kvôli číslovaniu
-    for (int i = 0; i <= size; i++) {
-        game->board[i] = malloc((size + 1) * sizeof(char)); // +1 kvôli číslovaniu
-        for (int j = 0; j <= size; j++) {
-            game->board[i][j] = (i == 0 || j == 0) ? ' ' : '-'; // Prvé riadky/stĺpce sú na číslovanie
-        }
-    }
-
-    // Číslovanie riadkov a stĺpcov
-    for (int i = 1; i <= size; i++) {
-        game->board[0][i] = '0' + i; // Hlavička stĺpcov
-        game->board[i][0] = '0' + i; // Hlavička riadkov
-    }
-
-    return game;
-}*/
 
 void game_init(GameLogic* game, int size, int win_condition, int num_players) {
     game->size = size;
@@ -44,7 +13,6 @@ void game_init(GameLogic* game, int size, int win_condition, int num_players) {
 
     // Inicializácia hracej plochy
     for (int i = 0; i <= size; i++) {
-     
         for (int j = 0; j <= size; j++) {
             game->board[i][j] = (i == 0 || j == 0) ? ' ' : '-'; // Prvé riadky/stĺpce sú na číslovanie
         }
@@ -55,35 +23,29 @@ void game_init(GameLogic* game, int size, int win_condition, int num_players) {
         game->board[0][i] = '0' + i; // Hlavička stĺpcov
         game->board[i][0] = '0' + i; // Hlavička riadkov
     }
-
-    printf("game init znak 2 2 %c\n", game->board[2][2]);
 }
 
 
-// Vykreslenie hracej plochy
-void print_board(int size_, char board_[100][100]) {
-    // Vymaže konzolu
-    //system("clear");
+
+void print_board(int size_, char board_[MAX_BOARD_SIZE][MAX_BOARD_SIZE]) {
+    system("clear");
     // Vypíše prvý riadok s číslami
     printf("   ");  // Medzera pre zarovnanie
     for (int j = 1; j <= size_; j++) {
-        printf("%2d ", j);  // Vypíše číslo stĺpca s pevným formátom na 2 miesta
+        printf("%2d ", j);  
     }
     printf("\n");
 
     // Vypíše riadky s číslami a hodnotami
     for (int i = 1; i <= size_; i++) {
-        printf("%2d ", i);  // Vypíše číslo riadku s pevným formátom na 2 miesta
+        printf("%2d ", i);  
         for (int j = 1; j <= size_; j++) {
-            printf("%2c ", board_[i][j]);  // Vypíše znak, zarovnaný na 2 miesta
+            printf("%2c ", board_[i][j]);  
         }
         printf("\n");
     }
 }
 
-
-
-// Vykonanie ťahu
 int make_move_logic(Move move, GameLogic* game) {
     // Posun o 1 kvôli číslovaniu
     if (move.row < 1 || move.row > game->size || move.col < 1 || move.col > game->size || game->board[move.row][move.col] != '-') {
@@ -92,7 +54,6 @@ int make_move_logic(Move move, GameLogic* game) {
     return 1; // Platný ťah
 }
 
-// Kontrola víťaza
 int check_winner(GameLogic *game) {
     int size = game->size;
     int win = game->win_condition;

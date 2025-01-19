@@ -4,6 +4,5 @@
 
 void printTitle();
 void printStartMenu();
-//void process_special_command(const char* input, Server* server);
 
 #endif
