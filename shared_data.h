@@ -16,7 +16,6 @@ typedef struct SharedData {
     sem_t* player_sems[MAX_PLAYERS];
     sem_t *mut_pc_;
     sem_t *startGame;
-    sem_t *update_board;
     sem_t *move_sem;
 } SharedData;
 
