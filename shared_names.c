@@ -8,7 +8,6 @@ void clearNames(SharedNames* names){
     free(names->shm_);
     free(names->mut_pc_);
     free(names->startGame);
-    free(names->update_board);
     free(names->move_sem);
 
     for(int i = 0; i < MAX_PLAYERS; i++) {        
@@ -31,7 +30,6 @@ void createNames(const char* suffix, SharedNames* names){
     names->shm_ = add_suffix("SHM", suffix);
     names->mut_pc_= add_suffix("MUT_PC", suffix);
     names->startGame = add_suffix("START_GAME", suffix);
-    names->update_board = add_suffix("UPDATE_BOARD", suffix);
     names->move_sem = add_suffix("MOVE_SEM", suffix);
 
     for(int i = 0; i < MAX_PLAYERS; i++) {
